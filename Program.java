@@ -1,12 +1,34 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
         Game game = new Game();
+        Scanner scan = new Scanner(System.in);
+
+        game.play();
+        game.checkWin();
+
         char response;
+        boolean loop = true;
         do {
-            game.play();
-        } while (false);
+
+            System.out.println("Would you like to Play the Game Again?");
+            System.out.print("[+]: ");
+            response = scan.next().toString().charAt(0);
+            scan.nextLine();
+            System.out.println();
+
+            if(response == 'y' || response == 'n') loop = false;
+
+        } while (loop);
+
+        if(response == 'y'){
+            Program.main(null);
+            return;
+        }
+
+        System.out.println("Thankyou for Playing!");
     }
 }
 
@@ -44,7 +66,18 @@ class Game {
             if(i == 20)break;
             clearConsole();
         }
+    }
 
+    public void checkWin() {
+        char a = picked[0];
+        char b = picked[1];
+        char c = picked[2];
+
+        if(a == b && a == c && b == c) {
+            System.out.println("You win!");
+        }else {
+            System.out.println("You Lose Try Another Game");
+        }
     }
     
     private void clearConsole() {
